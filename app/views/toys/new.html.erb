@@ -1,0 +1,30 @@
+<h1>Enter a new toy</h1>
+
+<div class="contact-form">
+  <%= form_with url: toys_new_path, model: @toy do |f| %>
+  <div>
+    <%= f.label :name %>:<br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %>:<br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :date_posted %>: <br>
+    <%= f.date_field :date_posted %>
+  </div>
+
+  <div>
+    <%= f.label :user %>: <br>
+    <%= f.text_field :user %>
+  </div>
+
+    <%= f.submit 'Save' %>
+  <% end %>
+</div>
+
+<br>
+<%=  link_to 'Listing Toys', toys_index_path %>
