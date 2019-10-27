@@ -1,4 +1,7 @@
 <p>
+  <%= image_tag @toy.picture if @toy.picture.attached? %>
+
+
   <strong>Name:</strong>
   <%= @toy.name %>
   <br>
@@ -9,7 +12,10 @@
   <%= @toy.date_posted %>
   <br>
   <strong>User:</strong>
-  <%= @toy.user %>
+  <%= @toy.user.email %>
+
+ 
 </p>
 
 <%=  link_to 'Listing Toys', toys_path %>
+<%= link_to 'Home', root_path %>

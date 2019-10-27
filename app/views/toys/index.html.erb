@@ -4,6 +4,8 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>User email</th>
+     <th>Manufacturers</th>
     <th colspan="3"></th>
   </tr>
 
@@ -11,15 +13,35 @@
   <tr>
     <td><%= toy.name %></td>
     <td><%= toy.description %></td>
+
+
+    <td><%= toy.user.email %></td>
+    <td><%= toy.manufacturer.name %></td>
+
+
+    
+    <% if user_signed_in? %>
     <td><%= link_to 'Show', toy_path(toy)%></td>
+    
+    
+    <% if current_user.id == toy.user_id %>
+
     <td><%= link_to 'Edit', edit_toy_path(toy)%></td>
     <td><%= link_to 'Destroy', toy_path(toy),
             method: :delete,
             data: { confirm: 'Are you sure?'} %></td>
+
+ <td></td>
+ <td></td>
   </tr>
+
+<%end  %>
+<%end  %>
 <% end %>
+
 </table>
 
 <br>
 
 <%=  link_to 'Add a New Toy', new_toy_path %>
+<%= link_to 'Home', root_path %>

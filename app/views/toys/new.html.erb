@@ -1,7 +1,7 @@
 <h1>Enter a new toy</h1>
 
 <div class="contact-form">
-  <%= form_with url: toys_new_path, model: @toy do |f| %>
+  <%= form_with model: @toy do |f| %>
   <div>
     <%= f.label :name %>:<br>
     <%= f.text_field :name %>
@@ -17,14 +17,27 @@
     <%= f.date_field :date_posted %>
   </div>
 
+  
+  
   <div>
-    <%= f.label :user %>: <br>
-    <%= f.text_field :user %>
+    <%= f.label :manufacturer_id %>: <br>
+    <%= f.select :manufacturer_id,
+    options_for_select( Manufacturer.all.collect { |u| [u.name, u.id] }, :selected => @toy.manufacturer_id ) %>
   </div>
 
+  
+
+  <div>
+  <%= f.label :picture %>
+  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpg,image/jpeg' %>
+  </div>
+
+
+  
     <%= f.submit 'Save' %>
   <% end %>
 </div>
 
 <br>
 <%=  link_to 'Listing Toys', toys_index_path %>
+<%= link_to 'Home', root_path %>

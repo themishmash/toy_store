@@ -22,3 +22,20 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+
+deleted from new.html.erb and edit
+``` rb
+<div>
+    <%= f.label :user_id %>: <br>
+    <%= f.select :user_id,
+    options_for_select( User.all.collect { |u| [u.email, u.id] }, :selected => @toy.user_id ) %>
+  </div>
+
+  <div>
+    <%= f.label :user %>: <br>
+    <%= f.select :user, 
+    options_for_select( User.all.collect { |u| [u.email, u.id] }, :selected => @toy.user.email ) %>
+  </div>
+```

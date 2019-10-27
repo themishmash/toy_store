@@ -1,13 +1,18 @@
 class ToysController < ApplicationController
-  
+  before_action :authenticate_user!, only: [:new]
+  # before_action :set_user_toy, only: [:show]
+  before_action :set_user_toy, only: [ :edit, :update, :destroy]
 
   def index
-   @toys = Toy.all
+  @toys = Toy.all
+
+  # @toys = current_user.toys
   end
 
   def show
-    @toy = Toy.all
-    @toy = Toy.find(params[:id])
+    
+    # @toy = Toy.all #don't want this as same name 
+    @toy = Toy.find(params[:id]) #don't need this as in before action (set by private )
 
   end
 
@@ -20,9 +25,9 @@ class ToysController < ApplicationController
   end
 
   def create #submit looks for create route
-    @toy = Toy.create(toy_params)
-    
-  
+    # @toy = Toy.new(toy_params)
+    @toy = current_user.toys.new( toy_params )
+
     if @toy.save
     redirect_to root_path
     else 
@@ -48,7 +53,21 @@ class ToysController < ApplicationController
   end 
 
   private
+
+  
   def toy_params
-    params.require(:toy).permit(:name, :description, :date_posted, :user)
+    params.require(:toy).permit(:name, :description, :date_posted, :user_id, :manufacturer_id, :picture)
   end
+
+  def set_user_toy
+    id = params[:id]
+    @toy = current_user.toys.find_by_id( id )
+ 
+    if @toy == nil
+      redirect_to toys_path
+    end 
+  end 
+
+
+
 end
